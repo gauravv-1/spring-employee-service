@@ -7,20 +7,17 @@ phases:
 
   build:
     commands:
-      - echo "Building, Testing, and packaging the application..."
-      - sh mvnw package -DskipTests  # Use 'sh' to execute
-      - echo "Listing contents of target directory..."
-      - ls target/
+      - echo Building, Testing, and packaging the application...
+      - mvn package -DskipTests  # Use 'sh' to execute
 
   post_build:
     commands:
-      - echo "Build, Testing, and packaging completed."
-      - echo "Checking if JAR file is created..."
-      - ls target/
+      - echo Build, Testing, and packaging completed.
+
 
 artifacts:
   files:
-    - '**/target/*.jar'
+    - target/*.jar
   discard-paths: yes
 
 cache:
