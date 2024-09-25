@@ -4,17 +4,25 @@ phases:
   install:
     runtime-versions:
       java: corretto21
-    build:
-      commands:
-        - echo Building, Testing and packaging the application...
-        - mvnw package -DskipTests
-    post_build:
-      commands:
-        - echo Build, Testing and packaging completed.
+
+  build:
+    commands:
+      - echo "Building, Testing, and packaging the application..."
+      - ./mvnw package -DskipTests  # Use Maven Wrapper
+      - echo "Listing contents of target directory..."
+      - ls target/  # Check if the JAR file is created
+
+  post_build:
+    commands:
+      - echo "Build, Testing, and packaging completed."
+      - echo "Checking if JAR file is created..."
+      - ls target/  # Verify the presence of JAR files
+
 artifacts:
   files:
-    - target/*.jar
+    - '**/target/*.jar'  # Use single quotes for wildcard patterns
   discard-paths: yes
+
 cache:
   paths:
-    - '/root/.m2/**/*'
+    - '/root/.m2/**/*'  # Cache Maven dependencies
